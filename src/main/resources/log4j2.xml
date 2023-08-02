@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="GETFile" fileName="/Users/hassan/Downloads/SpringBoot/src/main/java/com/Hassan/app/SpringBoot/logs/get.log"
+            filePattern="/Users/hassan/Downloads/SpringBoot/src/main/java/com/Hassan/app/SpringBoot/logs/get-%d{yyyy-MM-dd-HH-mm-ss}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy/>
+        </RollingFile>
+        <RollingFile name="POSTFile" fileName="/Users/hassan/Downloads/SpringBoot/src/main/java/com/Hassan/app/SpringBoot/logs/post.log"
+                     filePattern="/Users/hassan/Downloads/SpringBoot/src/main/java/com/Hassan/app/SpringBoot/logs/post-%d{yyyy-MM-dd-HH-mm-ss}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy/>
+        </RollingFile>
+        <RollingFile name="PUTFile" fileName="/Users/hassan/Downloads/SpringBoot/src/main/java/com/Hassan/app/SpringBoot/logs/put.log"
+                     filePattern="/Users/hassan/Downloads/SpringBoot/src/main/java/com/Hassan/app/SpringBoot/logs/put-%d{yyyy-MM-dd-HH-mm-ss}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy/>
+        </RollingFile>
+        <RollingFile name="DELETEFile" fileName="/Users/hassan/Downloads/SpringBoot/src/main/java/com/Hassan/app/SpringBoot/logs/delete.log"
+                     filePattern="/Users/hassan/Downloads/SpringBoot/src/main/java/com/Hassan/app/SpringBoot/logs/delete-%d{yyyy-MM-dd-HH-mm-ss}.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy/>
+        </RollingFile>
+
+        <Routing name="RoutingAppender">
+            <Routes pattern="$${ctx:httpMethod}">
+                <Route key="GET" ref="GETFile"/>
+                <Route key="POST" ref="POSTFile"/>
+                <Route key="PUT" ref="PUTFile"/>
+                <Route key="DELETE" ref="DELETEFile"/>
+            </Routes>
+        </Routing>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root Logger -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RoutingAppender"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

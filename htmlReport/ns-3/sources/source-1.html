@@ -1,0 +1,161 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ApplicationResource</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.Hassan.app.SpringBoot.resources</a>
+</div>
+
+<h1>Coverage Summary for Class: ApplicationResource (com.Hassan.app.SpringBoot.resources)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ApplicationResource</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.Hassan.app.SpringBoot.resources;
+&nbsp;
+&nbsp;import com.Hassan.app.SpringBoot.domain.Inventory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@RestController
+<b class="fc">&nbsp;public class ApplicationResource {</b>
+&nbsp;    @Autowired
+&nbsp;    private UserRepoResource userRepoResource;
+&nbsp;
+&nbsp;    @GetMapping(&quot;/inventory&quot;)
+&nbsp;    public List&lt;Inventory&gt; getInventory() {
+&nbsp;        try {
+<b class="fc">&nbsp;            return userRepoResource.findAll();</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @PostMapping(&quot;/add&quot;)
+&nbsp;    public String addInventory(@RequestBody Inventory inventory) {
+&nbsp;        try{
+<b class="fc">&nbsp;            userRepoResource.save(inventory);</b>
+<b class="fc">&nbsp;        } catch (Exception e) {</b>
+<b class="fc">&nbsp;            return &quot;Error Adding&quot;;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return &quot;Inventory added with id: &quot; + inventory.getID();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @PutMapping(&quot;/update/{id}&quot;)
+&nbsp;    public String updateInventory(@PathVariable int id, @RequestBody Inventory inventory) {
+&nbsp;        try {
+<b class="fc">&nbsp;            Inventory existingInventory = userRepoResource.findById(id).get();</b>
+<b class="fc">&nbsp;            existingInventory.setItemName(inventory.getItemName());</b>
+<b class="fc">&nbsp;            existingInventory.setItemCategory(inventory.getItemCategory());</b>
+<b class="fc">&nbsp;            existingInventory.setItemLocation(inventory.getItemLocation());</b>
+<b class="fc">&nbsp;            existingInventory.setItemQuantity(inventory.getItemQuantity());</b>
+<b class="fc">&nbsp;            userRepoResource.save(existingInventory);</b>
+<b class="fc">&nbsp;            return &quot;Inventory updated with id: &quot; + id + &quot; and name: &quot; + inventory.getItemName() + &quot; and quantity: &quot; + inventory.getItemQuantity();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        catch (Exception e) {</b>
+<b class="fc">&nbsp;            return &quot;Error Updating&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @DeleteMapping(&quot;/delete/{id}&quot;)
+&nbsp;    public String deleteInventory(@PathVariable int id) {
+&nbsp;        try {
+<b class="fc">&nbsp;            userRepoResource.deleteById(id);</b>
+<b class="fc">&nbsp;            return &quot;Inventory deleted with id: &quot; + id;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        catch (Exception e) {</b>
+<b class="fc">&nbsp;            return &quot;Error Deleting&quot;;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-02 15:28</div>
+</div>
+</body>
+</html>
